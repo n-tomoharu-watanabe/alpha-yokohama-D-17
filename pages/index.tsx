@@ -1,4 +1,7 @@
 import React from "react"
+import { Footer } from "../components/Footer"
+import { Header } from "../components/Header"
+import { SideButton } from "../components/SideButton"
 import { HorizonCcroll } from "./horizon-sccroll"
 
 function range(length: number) {
@@ -25,6 +28,22 @@ export const Page = () => {
       <HorizonCcroll>
         {sections.map((Section, i) => <div key={i} className="markdown-body"><Section key={i} /></div>)}
       </HorizonCcroll>
+
+      <div className="fixed top-0">
+        <Header />
+      </div>
+
+      <div className="fixed bottom-0">
+        <Footer />
+      </div>
+
+      <div className="fixed left-0 top-1/2 transform -translate-y-1/2">
+        <SideButton onClick={e => console.log(e)}>◀︎</SideButton>
+      </div>
+
+      <div className="fixed right-0 top-1/2 transform -translate-y-1/2">
+        <SideButton onClick={e => console.log(e)}>▶︎</SideButton>
+      </div>
     </div>
   )
 }
