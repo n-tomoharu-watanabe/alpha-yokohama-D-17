@@ -1,6 +1,7 @@
 import React from "react"
 import { Footer } from "../components/Footer"
 import { Header } from "../components/Header"
+import { SideButton } from "../components/SideButton"
 import { HorizonCcroll } from "./horizon-sccroll"
 
 function range(length: number) {
@@ -37,11 +38,11 @@ export const Page = () => {
       </div>
 
       <div className="fixed left-0 top-1/2 transform -translate-y-1/2">
-        <div className="w-20 h-20 bg-gray-600 opacity-50">Left</div>
+        <SideButton onClick={e => console.log(e)}>◀︎</SideButton>
       </div>
 
       <div className="fixed right-0 top-1/2 transform -translate-y-1/2">
-        <div className="w-20 h-20 bg-gray-600 opacity-50">Right</div>
+        <SideButton onClick={e => console.log(e)}>▶︎</SideButton>
       </div>
     </div>
   )
