@@ -25,6 +25,22 @@ export const Page = () => {
       <HorizonCcroll>
         {sections.map((Section, i) => <div key={i} className="markdown-body"><Section key={i} /></div>)}
       </HorizonCcroll>
+
+      <div className="fixed top-0">
+        <div className="w-screen h-20 bg-gray-600 opacity-50">Header</div>
+      </div>
+
+      <div className="fixed bottom-0">
+        <div className="w-screen h-20 bg-gray-600 opacity-50">Footer</div>
+      </div>
+
+      <div className="fixed left-0 top-1/2 transform -translate-y-1/2">
+        <div className="w-20 h-20 bg-gray-600 opacity-50">Left</div>
+      </div>
+
+      <div className="fixed right-0 top-1/2 transform -translate-y-1/2">
+        <div className="w-20 h-20 bg-gray-600 opacity-50">Right</div>
+      </div>
     </div>
   )
 }
