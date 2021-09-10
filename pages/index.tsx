@@ -1,5 +1,6 @@
 import React from "react"
 import { Footer } from "../components/Footer"
+import { Header } from "../components/Header"
 import { HorizonCcroll } from "./horizon-sccroll"
 
 function range(length: number) {
@@ -28,7 +29,7 @@ export const Page = () => {
       </HorizonCcroll>
 
       <div className="fixed top-0">
-        <div className="w-screen h-20 bg-gray-600 opacity-50">Header</div>
+        <Header />
       </div>
 
       <div className="fixed bottom-0">
