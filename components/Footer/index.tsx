@@ -43,7 +43,7 @@ export const Footer = () => {
 
         <div className="absolute right-0 bottom-full p-2">
           <button
-            className="w-6 lg:w-10 h-6 lg:h-10 rounded-full bg-gray-600 hover:bg-gray-500 text-white shadow-md"
+            className="w-8 lg:w-10 h-8 lg:h-10 rounded-full bg-gray-600 hover:bg-gray-500 text-white shadow-md"
             onClick={() => setIsDense(true)}
           >↓</button>
         </div>
