@@ -26,21 +26,40 @@ const usePassEffect = (length: number, effect: EffectCallback, deps?: Dependency
   }, deps)
 }
 
+const useRefState = function <T>(init: T) {
+  const [state, setState] = useState<T>(init)
+
+  const ref = useRef<any>(null)
+  ref.current = state
+
+  const result = {
+    get value(): T {
+      return ref.current
+    },
+    set value(value: T) {
+      setState(value)
+    }
+  }
+
+  return result
+}
+
 const useOnScroll = ({ start, end }: { start?: any, end?: any } = {}) => {
   const ref = useRef<HTMLElement>(null)
 
-  const [position, setPosition] = useState<number>(0)
+  const position = useRefState<number>(0)
 
   const document = useDocumentRect()
   const width = document?.width ?? 0
 
   useEffect(() => {
     ref.current?.addEventListener("scroll", (e) => {
-      setPosition((e.target as Element).scrollLeft)
+      position.value = (e.target as Element).scrollLeft
+      console.log(position.value)
     })
   }, [])
 
-  const sub = ((position % width < width / 2) ? 0 : width) - (position % width)
+  const sub = ((position.value % width < width / 2) ? 0 : width) - (position.value % width)
   const isSnaped = Math.abs(sub) < 0.1
 
   usePassEffect(2, () => {
@@ -76,6 +95,8 @@ export const Page = () => {
     <HorizonCcroll>
       <div>Hello1</div>
       <div>Hello2</div>
+      <div>Hello3</div>
+      <div>Hello4</div>
     </HorizonCcroll>
   )
 }
