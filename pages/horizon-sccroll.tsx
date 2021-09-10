@@ -61,8 +61,8 @@ export const HorizonCcroll = ({ children }: { children: any }) => {
   return (
     <div ref={ref} className="flex overflow-x-auto" style={{ scrollSnapType: "x mandatory" }}>
       {({ 0: [], 1: [children] }[length as 0 | 1] ?? children).map((child, i) => (
-        <div className={`w-screen h-screen bg-gray-${i % 2 ? 700 : 800} flex justify-center items-center`} style={{ scrollSnapAlign: "start" }} key={i}>
-          <div className="w-screen h-screen flex justify-center items-center text-white">
+        <div className={`w-screen h-screen bg-gray-800 flex justify-center items-center`} style={{ scrollSnapAlign: "start" }} key={i}>
+          <div className="box-border w-screen h-screen flex justify-center items-center text-white border-l-2 border-r-2 border-gray-700">
             {child}
           </div>
         </div>
