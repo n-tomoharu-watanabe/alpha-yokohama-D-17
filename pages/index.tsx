@@ -1,9 +1,13 @@
 import React from "react"
+
+import { HorizonCcroll } from "./horizon-sccroll"
+
 import { Footer } from "../components/Footer"
 import { Header } from "../components/Header"
 import { SideButton } from "../components/SideButton"
+
+import { useUpdateStore } from "./_app"
 import { replaceAnchorLinkNumber } from "../utils/anchor-link"
-import { HorizonCcroll } from "./horizon-sccroll"
 
 function range(length: number) {
   return Array.from({ length }, (_, i) => i)
@@ -24,6 +28,8 @@ export const Page = () => {
   const steps = range(modules.length + 1).map(i => () => <h1>Step{i + 1}</h1>)
   const sections = steps.map((step, i) => [step, ...(modules[i]?.default ?? [])]).flat()
 
+  const [store, updateStore] = useUpdateStore()
+
   const fixed = () => (
     <>
       <div className="fixed top-0">
@@ -36,14 +42,18 @@ export const Page = () => {
 
       <div className="fixed left-0 top-1/2 transform -translate-y-1/2">
         <SideButton onClick={() => {
-          replaceAnchorLinkNumber(n => Math.max(n - 1, 0))
+          replaceAnchorLinkNumber(n => store.state.section.includes(n - 1) ? n - 1 : n)
         }}>◀︎</SideButton>
       </div>
 
       <div className="fixed right-0 top-1/2 transform -translate-y-1/2">
         <SideButton onClick={() => {
-          replaceAnchorLinkNumber(n => n + 1)
+          replaceAnchorLinkNumber(n => store.state.section.includes(n + 1) ? n + 1 : n)
         }}>▶︎</SideButton>
+        <br />
+        <SideButton onClick={() => {
+          updateStore(({ state }) => state.section.push(state.section.length))
+        }}>+</SideButton>
       </div>
     </>
   )
