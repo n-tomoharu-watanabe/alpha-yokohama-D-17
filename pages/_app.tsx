@@ -5,10 +5,10 @@ import Head from 'next/head'
 import "../styles/globals.css"
 import "github-markdown-dracula-css"
 
-import { useStoreProvider } from '../utils/use-store-provider'
+import { createStoreProvider } from '../utils/create-store-provider'
 import { replaceAnchorLinkNumber } from '../utils/anchor-link'
 
-const [StoreProvider, StoreHooks] = useStoreProvider(() => (
+const [StoreProvider, StoreHooks] = createStoreProvider(() => (
   { state: { section: [0, 1, 2] } }
 ))
 
