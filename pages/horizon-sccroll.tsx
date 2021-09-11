@@ -73,9 +73,10 @@ const useOnScroll = ({ start, end }: { start?: any, end?: any } = {}) => {
   return ref as MutableRefObject<null>
 }
 
-export const HorizonCcroll = ({ children }: { children: any }) => {
+export const HorizonCcroll = ({ children, fixed }: { children: any, fixed?: React.VFC }) => {
   const ref = useOnScroll()
   const length: 0 | 1 | 2 = (children ?? {}).length ?? 0
+  const FixedComponent = fixed
 
   return (
     <div ref={ref} className="flex overflow-x-auto" style={{ scrollSnapType: "x mandatory" }}>
@@ -83,6 +84,7 @@ export const HorizonCcroll = ({ children }: { children: any }) => {
         <div className={`w-screen h-screen bg-gray-800 flex justify-center items-center`} style={{ scrollSnapAlign: "start" }} key={i}>
           <div className="box-border w-screen h-screen flex justify-center items-center text-white border-l-2 border-r-2 border-gray-700">
             {child}
+            {((i === 0 && FixedComponent) && (<FixedComponent />))}
           </div>
         </div>
       ))}

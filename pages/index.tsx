@@ -23,12 +23,8 @@ export const Page = () => {
   const steps = range(modules.length + 1).map(i => () => <h1>Step{i + 1}</h1>)
   const sections = steps.map((step, i) => [step, ...(modules[i]?.default ?? [])]).flat()
 
-  return (
-    <div>
-      <HorizonCcroll>
-        {sections.map((Section, i) => <div key={i} className="markdown-body"><Section key={i} /></div>)}
-      </HorizonCcroll>
-
+  const fixed = () => (
+    <>
       <div className="fixed top-0">
         <Header />
       </div>
@@ -44,6 +40,14 @@ export const Page = () => {
       <div className="fixed right-0 top-1/2 transform -translate-y-1/2">
         <SideButton onClick={e => console.log(e)}>▶︎</SideButton>
       </div>
+    </>
+  )
+
+  return (
+    <div>
+      <HorizonCcroll fixed={fixed}>
+        {sections.map((Section, i) => <div key={i} className="markdown-body"><Section key={i} /></div>)}
+      </HorizonCcroll>
     </div>
   )
 }
