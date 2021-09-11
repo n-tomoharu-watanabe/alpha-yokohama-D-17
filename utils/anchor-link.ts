@@ -12,5 +12,5 @@ export const replaceAnchorLink = (update: (value: string) => string) => {
 }
 
 export const replaceAnchorLinkNumber = (update: (value: number) => number) => {
-  replaceAnchorLink(v => `section${update(Number(v.match(/\d+/)?.[0] ?? 0))}`)
+  replaceAnchorLink(v => v.replace(/\d+$/, _v => String(update(Number(_v)))))
 }
