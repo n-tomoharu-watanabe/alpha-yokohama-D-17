@@ -34,11 +34,19 @@ export const Page = () => {
       </div>
 
       <div className="fixed left-0 top-1/2 transform -translate-y-1/2">
-        <SideButton onClick={e => console.log(e)}>◀︎</SideButton>
+        <SideButton onClick={() => {
+          window.location.hash = window.location.hash.replace(
+            /(?<=#section)\d+/gm, v => String(Math.max(Number(v) - 1, 0))
+          )
+        }}>◀︎</SideButton>
       </div>
 
       <div className="fixed right-0 top-1/2 transform -translate-y-1/2">
-        <SideButton onClick={e => console.log(e)}>▶︎</SideButton>
+        <SideButton onClick={() => {
+          window.location.hash = window.location.hash.replace(
+            /(?<=#section)\d+/gm, v => String(Number(v) + 1)
+          )
+        }}>▶︎</SideButton>
       </div>
     </>
   )
