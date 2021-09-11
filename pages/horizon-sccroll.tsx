@@ -1,4 +1,5 @@
 import { DependencyList, EffectCallback, MutableRefObject, useEffect, useRef, useState } from "react"
+import { replaceAnchorLinkNumber } from "../utils/anchor-link"
 
 function range(length: number) {
   return Array.from({ length }, (_, i) => i)
@@ -65,6 +66,7 @@ const useOnScroll = ({ start, end }: { start?: any, end?: any } = {}) => {
   usePassEffect(2, () => {
     if (isSnaped) {
       console.log("scroll end")
+      replaceAnchorLinkNumber(() => (position.value + sub) / width)
     } else {
       console.log("scroll start")
     }
