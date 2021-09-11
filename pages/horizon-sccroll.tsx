@@ -56,7 +56,6 @@ const useOnScroll = ({ start, end }: { start?: any, end?: any } = {}) => {
   useEffect(() => {
     ref.current?.addEventListener("scroll", (e) => {
       position.value = (e.target as Element).scrollLeft
-      console.log(position.value)
     })
   }, [])
 
