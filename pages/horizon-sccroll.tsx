@@ -1,4 +1,6 @@
 import { DependencyList, EffectCallback, MutableRefObject, useEffect, useRef, useState } from "react"
+
+import { useStore } from "./_app"
 import { replaceAnchorLinkNumber } from "../utils/anchor-link"
 
 function range(length: number) {
@@ -79,9 +81,15 @@ export const HorizonCcroll = ({ children, fixed }: { children: any, fixed?: Reac
   const length: 0 | 1 | 2 = (children ?? {}).length ?? 0
   const FixedComponent = fixed
 
+  const store = useStore()
+
+  const predicate = (_: unknown, i: number) => (
+    store.state.section.length ? store.state.section.includes(i) : true
+  )
+
   return (
     <div ref={ref} className="flex overflow-x-auto" style={{ scrollSnapType: "x mandatory", scrollBehavior: "smooth" }}>
-      {({ 0: [], 1: [children] }[length as 0 | 1] ?? children).map((child, i) => (
+      {({ 0: [], 1: [children] }[length as 0 | 1] ?? children).filter(predicate).map((child, i) => (
         <section id={`section${i}`} className="w-screen h-screen bg-gray-800 flex justify-center items-center" style={{ scrollSnapAlign: "start" }} key={i}>
           <div className="box-border w-screen h-screen flex justify-center items-center text-white border-l-2 border-r-2 border-gray-700">
             {child}

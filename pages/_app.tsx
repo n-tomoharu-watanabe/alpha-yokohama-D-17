@@ -5,7 +5,23 @@ import Head from 'next/head'
 import "../styles/globals.css"
 import "github-markdown-dracula-css"
 
+import { useStoreProvider } from '../utils/use-store-provider'
+
+const [StoreProvider, StoreHooks] = useStoreProvider(() => (
+  { state: { section: [0, 1, 2] } }
+))
+
+export const { useStore, useUpdateStore } = StoreHooks
+
+const AppContainer = (props: AppProps) => (
+  <StoreProvider>
+    <App {...props} />
+  </StoreProvider>
+)
+
 const App = ({ Component, pageProps }: AppProps) => {
+  const store = useStore()
+
   useEffect(() => {
     console.log("onload")
 
@@ -13,8 +29,7 @@ const App = ({ Component, pageProps }: AppProps) => {
       window.location.hash = "section0"
     }
 
-    // ToDo: LocalStorageの履歴などから、飛んでいいかどうか確認
-    if (0 < Number(window.location.hash.match(/\d+/)?.[0] ?? 0)) {
+    if (store.state.section.includes(Number(window.location.hash.match(/\d+/)?.[0] ?? 0))) {
       window.location.hash = "section0"
     }
   }, [])
@@ -32,4 +47,4 @@ const App = ({ Component, pageProps }: AppProps) => {
   )
 }
 
-export default App
+export default AppContainer
