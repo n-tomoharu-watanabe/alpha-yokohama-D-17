@@ -1,6 +1,6 @@
 const basePath = (
   process.env.NODE_ENV === "production"
-) ? "/escape-from-beverly-hills" : ""
+) ? "/alpha-yokohama-D-17" : ""
 
 /** @type {import('next').NextConfig} */
 module.exports = {
