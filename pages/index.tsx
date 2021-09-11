@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 
 import { HorizonCcroll } from "./horizon-sccroll"
 
@@ -7,7 +7,7 @@ import { Header } from "../components/Header"
 import { SideButton } from "../components/SideButton"
 
 import { useUpdateStore } from "./_app"
-import { replaceAnchorLinkNumber } from "../utils/anchor-link"
+import { getAnchorLink, replaceAnchorLinkNumber } from "../utils/anchor-link"
 
 function range(length: number) {
   return Array.from({ length }, (_, i) => i)
@@ -21,6 +21,31 @@ interface MDXModule {
   default: React.VFC<any>[]
 }
 
+const useAnchorLinkNumber = () => {
+  const [state, setState] = useState<number>(0)
+
+  useEffect(() => {
+    setState(Number(getAnchorLink().match(/\d+$/gm) ?? 0))
+
+    window.addEventListener("hashchange", () => {
+      setState(Number(getAnchorLink().match(/\d+$/gm) ?? 0))
+    })
+  }, [])
+
+  return state
+}
+
+export function useIsFirst(): boolean {
+  const [flag, setFlag] = useState<boolean>(true)
+
+  if (flag) {
+    setFlag(false)
+    return true
+  } else {
+    return false
+  }
+}
+
 export const Page = () => {
   const modules: MDXModule[] = importAll(require.context("../assets/steps"))
 
@@ -29,6 +54,9 @@ export const Page = () => {
   const sections = steps.map((step, i) => [step, ...(modules[i]?.default ?? [])]).flat()
 
   const [store, updateStore] = useUpdateStore()
+
+  const isFirst = useIsFirst()
+  const nowSection = useAnchorLinkNumber()
 
   const fixed = () => (
     <>
@@ -43,13 +71,17 @@ export const Page = () => {
       <div className="fixed left-0 top-1/2 transform -translate-y-1/2">
         <SideButton onClick={() => {
           replaceAnchorLinkNumber(n => store.state.section.includes(n - 1) ? n - 1 : n)
-        }}>◀︎</SideButton>
+        }} disabled={
+          !isFirst ? !store.state.section.includes(nowSection - 1) : false
+        }>◀︎</SideButton>
       </div>
 
       <div className="fixed right-0 top-1/2 transform -translate-y-1/2">
         <SideButton onClick={() => {
           replaceAnchorLinkNumber(n => store.state.section.includes(n + 1) ? n + 1 : n)
-        }}>▶︎</SideButton>
+        }} disabled={
+          !isFirst ? !store.state.section.includes(nowSection + 1) : false
+        }>▶︎</SideButton>
         <br />
         <SideButton onClick={() => {
           updateStore(({ state }) => state.section.push(state.section.length))
