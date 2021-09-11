@@ -8,7 +8,12 @@ export const setAnchorLink = (value: string) => {
 }
 
 export const replaceAnchorLink = (update: (value: string) => string) => {
-  setAnchorLink(update(getAnchorLink()))
+  const oldAnchor = getAnchorLink()
+  const newAnchor = update(oldAnchor)
+
+  if (oldAnchor !== newAnchor) {
+    setAnchorLink(newAnchor)
+  }
 }
 
 export const replaceAnchorLinkNumber = (update: (value: number) => number) => {
