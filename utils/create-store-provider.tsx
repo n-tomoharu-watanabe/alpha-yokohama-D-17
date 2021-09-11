@@ -14,7 +14,7 @@ function useContextProvider<T>(initialState: T | (() => T)) {
 }
 
 
-export function useStoreProvider<T>(initialState: T | (() => T)) {
+export function createStoreProvider<T>(initialState: T | (() => T)) {
   const [StoreContext, StoreProvider] = useContextProvider(() => {
     const [state, update] = useUpdateState(initialState)
     return { state, update }
