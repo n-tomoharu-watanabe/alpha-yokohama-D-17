@@ -79,14 +79,14 @@ export const HorizonCcroll = ({ children, fixed }: { children: any, fixed?: Reac
   const FixedComponent = fixed
 
   return (
-    <div ref={ref} className="flex overflow-x-auto" style={{ scrollSnapType: "x mandatory" }}>
+    <div ref={ref} className="flex overflow-x-auto" style={{ scrollSnapType: "x mandatory", scrollBehavior: "smooth" }}>
       {({ 0: [], 1: [children] }[length as 0 | 1] ?? children).map((child, i) => (
-        <div className={`w-screen h-screen bg-gray-800 flex justify-center items-center`} style={{ scrollSnapAlign: "start" }} key={i}>
+        <section id={`section${i}`} className="w-screen h-screen bg-gray-800 flex justify-center items-center" style={{ scrollSnapAlign: "start" }} key={i}>
           <div className="box-border w-screen h-screen flex justify-center items-center text-white border-l-2 border-r-2 border-gray-700">
             {child}
             {((i === 0 && FixedComponent) && (<FixedComponent />))}
           </div>
-        </div>
+        </section>
       ))}
     </div>
   )
