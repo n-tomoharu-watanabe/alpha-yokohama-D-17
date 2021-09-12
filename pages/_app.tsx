@@ -9,7 +9,7 @@ import { createStoreProvider } from '../utils/create-store-provider'
 import { replaceAnchorLinkNumber } from '../utils/anchor-link'
 
 const [StoreProvider, StoreHooks] = createStoreProvider(() => (
-  { state: { section: [0, 1, 2] } }
+  { state: { section: ([] as number[]) } }
 ))
 
 export const { useStore, useUpdateStore } = StoreHooks
@@ -21,9 +21,13 @@ const AppContainer = (props: AppProps) => (
 )
 
 const App = ({ Component, pageProps }: AppProps) => {
-  const store = useStore()
+  const [store, updateStore] = useUpdateStore()
 
   useEffect(() => {
+    updateStore(({ state }) => {
+      state.section = [0, 1, 2]
+    })
+
     if (!window.location.hash) {
       window.location.hash = "section0"
     }
