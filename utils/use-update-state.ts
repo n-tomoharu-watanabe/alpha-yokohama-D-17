@@ -1,7 +1,7 @@
 import { useState } from "react"
 
 export function useUpdateState<T>(initialState: T | (() => T)) {
-  const [state, setState] = useState((
+  const [_state, _setState] = useState((
     initialState instanceof Function ? (
       () => ({ value: initialState() })
     ) : (
@@ -9,12 +9,17 @@ export function useUpdateState<T>(initialState: T | (() => T)) {
     )
   ))
 
-  const update = (
+  const updateState = (
     callback: (state: T) => any
   ) => {
-    callback(state.value)
-    setState({ value: state.value })
+    callback(_state.value)
+    _setState({ value: _state.value })
   }
 
-  return [state.value, update] as const
+  const setState = (state: T) => {
+    _state.value = state
+    _setState({ value: state })
+  }
+
+  return [_state.value, updateState, setState] as const
 }
