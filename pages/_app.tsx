@@ -8,6 +8,7 @@ import "github-markdown-dracula-css"
 import { createStoreProvider } from '../utils/create-store-provider'
 import { replaceAnchorLinkNumber } from '../utils/anchor-link'
 import { useProxyRef } from '../utils/use-proxy-ref'
+import { useEffected } from '../utils/use-effected'
 
 const [StoreProvider, StoreHooks] = createStoreProvider(() => {
   return { state: { section: [0] } }
@@ -32,15 +33,17 @@ const App = ({ Component, pageProps }: AppProps) => {
       window.location.hash = "section0"
     }
 
-    replaceAnchorLinkNumber(n => (
-      store.state.section.includes(n) ? n : 0
-    ))
-
     window.addEventListener("hashchange", () => {
       replaceAnchorLinkNumber(n => (
         store.state.section.includes(n) ? n : 0
       ))
     })
+  }, [])
+
+  useEffected(() => {
+    replaceAnchorLinkNumber(n => (
+      store.state.section.includes(n) ? n : 0
+    ))
   }, [])
 
   return (
