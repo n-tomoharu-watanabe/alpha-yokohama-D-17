@@ -84,7 +84,7 @@ export const HorizonCcroll = ({ children, fixed }: { children: any, fixed?: Reac
   const store = useStore()
 
   const getDisplay = (v: unknown, i: number) => (
-    [v, (store.state.section.length ? (store.state.section.includes(i) ? "flex" : null) : "hidden")] as const
+    [v, store.state.section.includes(i) ? "flex" : null] as const
   )
 
   return (

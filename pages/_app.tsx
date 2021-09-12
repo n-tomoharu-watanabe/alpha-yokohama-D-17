@@ -7,12 +7,13 @@ import "github-markdown-dracula-css"
 
 import { createStoreProvider } from '../utils/create-store-provider'
 import { replaceAnchorLinkNumber } from '../utils/anchor-link'
+import { useProxyRef } from '../utils/use-proxy-ref'
 
-const [StoreProvider, StoreHooks] = createStoreProvider(() => (
-  { state: { section: ([] as number[]) } }
-))
+const [StoreProvider, StoreHooks] = createStoreProvider(() => {
+  return { state: { section: [0] } }
+})
 
-export const { useStore, useUpdateStore } = StoreHooks
+export const { useStore, useUpdateStore, useSetStore } = StoreHooks
 
 const AppContainer = (props: AppProps) => (
   <StoreProvider>
@@ -21,12 +22,11 @@ const AppContainer = (props: AppProps) => (
 )
 
 const App = ({ Component, pageProps }: AppProps) => {
-  const [store, updateStore] = useUpdateStore()
+  const [_store, setStore] = useSetStore()
+  const store = useProxyRef(_store)
 
   useEffect(() => {
-    updateStore(({ state }) => {
-      state.section = [0, 1, 2]
-    })
+    setStore({ state: { section: [0, 1, 2] } })
 
     if (!window.location.hash) {
       window.location.hash = "section0"
