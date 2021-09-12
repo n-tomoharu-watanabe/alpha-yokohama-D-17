@@ -16,8 +16,8 @@ function useContextProvider<T>(initialState: T | (() => T)) {
 
 export function createStoreProvider<T>(initialState: T | (() => T)) {
   const [StoreContext, StoreProvider] = useContextProvider(() => {
-    const [state, update] = useUpdateState(initialState)
-    return { state, update }
+    const [state, update, set] = useUpdateState(initialState)
+    return { state, update, set }
   })
 
   const useStore = () => {
@@ -30,7 +30,12 @@ export function createStoreProvider<T>(initialState: T | (() => T)) {
     return [state, update] as const
   }
 
-  const hooks = { useStore, useUpdateStore }
+  const useSetStore = () => {
+    const { state, set } = useContext(StoreContext)
+    return [state, set] as const
+  }
+
+  const hooks = { useStore, useUpdateStore, useSetStore }
 
   return [StoreProvider, hooks] as const
 }
