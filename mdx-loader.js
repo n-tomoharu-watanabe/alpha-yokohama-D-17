@@ -18,8 +18,8 @@ const loader = async function (content) {
     filepath: this.resourcePath
   })
 
-  const regex = /(?<=\n)\-{3,}\n|(?<=\n)\*{3,}\n/gm
-  const contents = content.split(regex)
+  const regex = /(?<=\n)\-{3,}[.| ]*?\n|(?<=\n)\*{3,}[.| ]*?\n/gm
+  const contents = content.replace(/\n/gm, "  \n").split(regex)
 
   const result = await Promise.all(
     contents.map(_content => mdx(_content, options))
