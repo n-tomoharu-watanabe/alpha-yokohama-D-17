@@ -27,7 +27,8 @@ const App = ({ Component, pageProps }: AppProps) => {
   const store = useProxyRef(_store)
 
   useEffect(() => {
-    setStore({ state: { section: [0, 1, 2] } })
+    const sections = document.querySelectorAll(".section-container > section")
+    setStore({ state: { section: range(sections.length) } })
 
     if (!window.location.hash) {
       window.location.hash = "section0"
@@ -42,7 +43,8 @@ const App = ({ Component, pageProps }: AppProps) => {
 
   useEffected(() => {
     replaceAnchorLinkNumber(n => (
-      store.state.section.includes(n) ? n : 0
+      0 // 初期では、0に飛ばすように一時変更
+      // store.state.section.includes(n) ? n : 0
     ))
   }, [])
 

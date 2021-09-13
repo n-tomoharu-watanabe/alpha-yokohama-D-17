@@ -84,11 +84,11 @@ export const HorizonCcroll = ({ children, fixed }: { children: any, fixed?: Reac
   const store = useStore()
 
   const getDisplay = (v: unknown, i: number) => (
-    [v, store.state.section.includes(i) ? "flex" : null] as const
+    [v, store.state.section.includes(i) ? "flex" : "hidden"] as const
   )
 
   return (
-    <div ref={ref} className="flex overflow-x-auto" style={{ scrollSnapType: "x mandatory", scrollBehavior: "smooth" }}>
+    <div ref={ref} className="flex overflow-x-auto section-container" style={{ scrollSnapType: "x mandatory", scrollBehavior: "smooth" }}>
       {({ 0: [], 1: [children] }[length as 0 | 1] ?? children).map(getDisplay).filter(([_, display]) => display).map(([child, display], i) => (
         <section id={`section${i}`} className={`${display} w-screen h-screen bg-gray-800 justify-center items-center`} style={{ scrollSnapAlign: "start" }} key={i}>
           <div className="box-border w-screen h-screen flex justify-center items-center text-white border-l-2 border-r-2 border-gray-700">
