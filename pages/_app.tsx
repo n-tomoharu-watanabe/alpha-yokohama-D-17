@@ -14,6 +14,10 @@ const [StoreProvider, StoreHooks] = createStoreProvider(() => {
   return { state: { section: [0] } }
 })
 
+function range(length: number) {
+  return Array.from({ length }, (_, i) => i)
+}
+
 export const { useStore, useUpdateStore, useSetStore } = StoreHooks
 
 const AppContainer = (props: AppProps) => (
