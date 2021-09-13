@@ -43,7 +43,8 @@ const App = ({ Component, pageProps }: AppProps) => {
 
   useEffected(() => {
     replaceAnchorLinkNumber(n => (
-      store.state.section.includes(n) ? n : 0
+      0 // 初期では、0に飛ばすように一時変更
+      // store.state.section.includes(n) ? n : 0
     ))
   }, [])
 
