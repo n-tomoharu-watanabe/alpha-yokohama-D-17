@@ -51,8 +51,8 @@ export function useIsFirst(): boolean {
 }
 
 export const Page = () => {
-  const mdxModules: MDXModule[] = importAll(require.context("../assets/steps"))
-  const tsxModules: TSXModule[] = importAll(require.context("../assets/steps-tsx")).filter((_, i) => i % 2)
+  const mdxModules: MDXModule[] = importAll(require.context("../assets/between-steps"))
+  const tsxModules: TSXModule[] = importAll(require.context("../assets/steps")).filter((_, i) => i % 2)
 
   // eslint-disable-next-line react/display-name
   const steps = range(tsxModules.length).map((_, i) => (() => tsxModules[i].default))
