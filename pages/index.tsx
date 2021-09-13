@@ -21,6 +21,10 @@ interface MDXModule {
   default: React.VFC<any>[]
 }
 
+interface TSXModule {
+  default: React.ReactElement
+}
+
 const useAnchorLinkNumber = () => {
   const [state, setState] = useState<number>(0)
 
@@ -47,11 +51,12 @@ export function useIsFirst(): boolean {
 }
 
 export const Page = () => {
-  const modules: MDXModule[] = importAll(require.context("../assets/steps"))
+  const mdxModules: MDXModule[] = importAll(require.context("../assets/steps"))
+  const tsxModules: TSXModule[] = importAll(require.context("../assets/steps-tsx")).filter((_, i) => i % 2)
 
   // eslint-disable-next-line react/display-name
-  const steps = range(modules.length + 1).map(i => () => <h1>Step{i + 1}</h1>)
-  const sections = steps.map((step, i) => [step, ...(modules[i]?.default ?? [])]).flat()
+  const steps = range(tsxModules.length).map((_, i) => (() => tsxModules[i].default))
+  const sections = steps.map((step, i) => [step, ...(mdxModules[i]?.default ?? [])]).flat()
 
   const [store, updateStore] = useUpdateStore()
 
