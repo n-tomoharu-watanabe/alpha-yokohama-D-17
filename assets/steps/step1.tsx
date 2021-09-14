@@ -43,7 +43,7 @@ export const Page = () => {
               style={{ margin: "0 0.3em" }}
               {...register("select")}
             />
-            <span>{i + 1}. 場所A</span>
+            <span>{i + 1}. 場所{"ABCD"[i]}</span>
           </div>
         ))}
       </div>
