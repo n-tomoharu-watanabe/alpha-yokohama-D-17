@@ -6,8 +6,8 @@ import { Footer } from "../components/Footer"
 import { Header } from "../components/Header"
 import { SideButton } from "../components/SideButton"
 
-import { useUpdateStore } from "./_app"
-import { getAnchorLink, replaceAnchorLinkNumber } from "../utils/anchor-link"
+import { getAnchorLink } from "../utils/anchor-link"
+import { useAvailableSections } from "../lib/use-available-sections"
 
 function range(length: number) {
   return Array.from({ length }, (_, i) => i)
@@ -56,9 +56,18 @@ export const Page = () => {
 
   // eslint-disable-next-line react/display-name
   const steps = range(tsxModules.length).map((_, i) => (() => tsxModules[i].default))
-  const sections = steps.map((step, i) => [step, ...(mdxModules[i]?.default ?? [])]).flat()
 
-  const [store, updateStore] = useUpdateStore()
+  const sections = steps.map((step, i) => [
+    { type: "step", Section: step },
+    ...(mdxModules[i]?.default ?? [])
+      .map(v => ({ type: "between-step", Section: v }))
+  ]).flat()
+
+  const {
+    isAvailableSction,
+    moveToAvailableSection,
+    addNextStepToAvailableSections
+  } = useAvailableSections()
 
   const isFirst = useIsFirst()
   const nowSection = useAnchorLinkNumber()
@@ -75,21 +84,21 @@ export const Page = () => {
 
       <div className="fixed left-0 top-1/2 transform -translate-y-1/2">
         <SideButton onClick={() => {
-          replaceAnchorLinkNumber(n => store.state.section.includes(n - 1) ? n - 1 : n)
+          moveToAvailableSection(n => n - 1)
         }} disabled={
-          !isFirst ? !store.state.section.includes(nowSection - 1) : false
+          !isFirst ? !isAvailableSction(nowSection - 1) : false
         }>◀︎</SideButton>
       </div>
 
       <div className="fixed right-0 top-1/2 transform -translate-y-1/2">
         <SideButton onClick={() => {
-          replaceAnchorLinkNumber(n => store.state.section.includes(n + 1) ? n + 1 : n)
+          moveToAvailableSection(n => n + 1)
         }} disabled={
-          !isFirst ? !store.state.section.includes(nowSection + 1) : false
+          !isFirst ? !isAvailableSction(nowSection + 1) : false
         }>▶︎</SideButton>
         <br />
         <SideButton onClick={() => {
-          updateStore(({ state }) => state.section.push(state.section.length))
+          addNextStepToAvailableSections()
         }}>+</SideButton>
       </div>
     </>
@@ -98,7 +107,11 @@ export const Page = () => {
   return (
     <div>
       <HorizonCcroll fixed={fixed}>
-        {sections.map((Section, i) => <div key={i} className="markdown-body"><Section key={i} /></div>)}
+        {sections.map(({ type, Section, }, i) => (
+          <div key={i} className={`markdown-body section-type-${type}`}>
+            <Section key={i} />
+          </div>
+        ))}
       </HorizonCcroll>
     </div>
   )

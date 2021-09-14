@@ -1,7 +1,7 @@
 import { DependencyList, EffectCallback, MutableRefObject, useEffect, useRef, useState } from "react"
 
-import { useStore } from "./_app"
 import { replaceAnchorLinkNumber } from "../utils/anchor-link"
+import { useAvailableSections } from "../lib/use-available-sections"
 
 function range(length: number) {
   return Array.from({ length }, (_, i) => i)
@@ -81,10 +81,10 @@ export const HorizonCcroll = ({ children, fixed }: { children: any, fixed?: Reac
   const length: 0 | 1 | 2 = (children ?? {}).length ?? 0
   const FixedComponent = fixed
 
-  const store = useStore()
+  const { isAvailableSction } = useAvailableSections()
 
   const getDisplay = (v: unknown, i: number) => (
-    [v, store.state.section.includes(i) ? "flex" : "hidden"] as const
+    [v, isAvailableSction(i) ? "flex" : "hidden"] as const
   )
 
   return (
