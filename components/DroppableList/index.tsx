@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd'
+import { DragDropContext, Droppable, Draggable, DropResult, DroppableProvided } from 'react-beautiful-dnd'
+import { CloneElement } from '../CloneElement'
 
 const moveItem = function <T>(list: T[], from: number, to: number) {
   console.log("move", from, "=>", to)
@@ -14,10 +15,11 @@ const moveItem = function <T>(list: T[], from: number, to: number) {
 interface DroppableList<T> {
   items: T[]
   children: (item: T, key: string, index: number) => React.ReactElement
+  container?: React.ReactElement
   onDragEnd?: (items: T[]) => void
 }
 
-export const DraggableList = function <T extends object>({ children, ...props }: DroppableList<T>) {
+export const DraggableList = function <T extends object>({ children, container, ...props }: DroppableList<T>) {
   const [items, setItems] = useState<({ key: string, value: T })[]>([])
 
   useEffect(() => {
@@ -41,7 +43,10 @@ export const DraggableList = function <T extends object>({ children, ...props }:
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId="list" direction="horizontal">
         {(provided) => (
-          <div ref={provided.innerRef} {...provided.droppableProps} className="flex">
+          <CloneElement
+            element={container ?? (<div className="flex justify-center"></div>)}
+            props={{ children, ref: provided.innerRef, ...provided.droppableProps }}
+          >
             {items.map((item, index) => (
               <Draggable draggableId={item.key} index={index} key={item.key}>
                 {(provided) => (
@@ -58,7 +63,7 @@ export const DraggableList = function <T extends object>({ children, ...props }:
               </Draggable>
             ))}
             {provided.placeholder}
-          </div>
+          </CloneElement>
         )}
       </Droppable>
     </DragDropContext>
