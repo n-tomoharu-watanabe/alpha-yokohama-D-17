@@ -15,7 +15,9 @@ const Page = () => {
         text-gray-700 hover:text-gray-100
       " onClick={() => {
         addNextStepToAvailableSections()
-        moveToAvailableSection(i => i + 1)
+        setTimeout(() => {
+          moveToAvailableSection(i => i + 1)
+        }, 100)
       }}>
         Let's Start!
       </button>
