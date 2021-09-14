@@ -1,8 +1,8 @@
-import { useStore, useUpdateStore } from "../pages/_app"
+import { Store } from "./store"
 import { replaceAnchorLinkNumber } from "../utils/anchor-link"
 
 export const useAvailableSections = () => {
-  const [store, updateStore] = useUpdateStore()
+  const [store, updateStore] = Store.useWithUpdate()
 
   const isAvailableSction = (n: number): boolean => {
     return store.state.section.includes(n)
