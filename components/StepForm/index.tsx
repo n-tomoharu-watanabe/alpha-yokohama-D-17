@@ -6,18 +6,19 @@ interface StepFormType {
 }
 
 interface StepFormProps {
+  value?: string
   answer: string
   header?: React.ReactNode
   children?: (hooks: UseFormReturn<StepFormType, object>) => React.ReactNode
-}  
+}
 
-export const StepForm = ({ answer, header, children }: StepFormProps) => {
+export const StepForm = ({ value = "", answer, header, children }: StepFormProps) => {
   const {
     moveToAvailableSection,
     addNextStepToAvailableSections
   } = useAvailableSections()
 
-  const formHooks = useForm<StepFormType>()
+  const formHooks = useForm<StepFormType>({ defaultValues: { value } })
   const { handleSubmit, setValue } = formHooks
 
   return (
