@@ -5,29 +5,19 @@ import Head from 'next/head'
 import "../styles/globals.css"
 import "github-markdown-dracula-css"
 
-import { createStoreProvider } from '../utils/create-store-provider'
+import { Store } from '../lib/store'
 import { replaceAnchorLinkNumber } from '../utils/anchor-link'
 import { useProxyRef } from '../utils/use-proxy-ref'
 import { useEffected } from '../utils/use-effected'
 
-const [StoreProvider, StoreHooks] = createStoreProvider(() => {
-  return { state: { section: [0] } }
-})
-
-function range(length: number) {
-  return Array.from({ length }, (_, i) => i)
-}
-
-export const { useStore, useUpdateStore, useSetStore } = StoreHooks
-
 const AppContainer = (props: AppProps) => (
-  <StoreProvider>
+  <Store.Provider>
     <App {...props} />
-  </StoreProvider>
+  </Store.Provider>
 )
 
 const App = ({ Component, pageProps }: AppProps) => {
-  const [_store, setStore] = useSetStore()
+  const [_store, setStore] = Store.useWithSet()
   const store = useProxyRef(_store)
 
   useEffect(() => {
