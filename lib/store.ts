@@ -12,17 +12,9 @@ const [Provider, Hooks] = createStoreProvider(() => DefaultStore)
 const { useStore, useUpdateStore, useSetStore } = Hooks
 
 export class Store {
-  static use() {
-    return useStore()
-  }
-
-  static useWithUpdate() {
-    return useUpdateStore()
-  }
-
-  static useWithSet() {
-    return useSetStore()
-  }
+  static use = useStore
+  static useWithUpdate = useUpdateStore
+  static useWithSet = useSetStore
 
   static get default() {
     return DefaultStore
