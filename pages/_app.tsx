@@ -31,8 +31,7 @@ const App = ({ Component, pageProps }: AppProps) => {
   const store = useProxyRef(_store)
 
   useEffect(() => {
-    const sections = document.querySelectorAll(".section-container > section")
-    setStore({ state: { section: range(sections.length) } })
+    setStore({ state: { section: [0] } })
 
     if (!window.location.hash) {
       window.location.hash = "section0"
