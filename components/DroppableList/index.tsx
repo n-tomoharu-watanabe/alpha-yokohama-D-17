@@ -19,7 +19,7 @@ interface DroppableList<T> {
   onDragEnd?: (items: T[]) => void
 }
 
-export const DraggableList = function <T extends object>({ children, container, ...props }: DroppableList<T>) {
+export const DraggableList = function <T>({ children, container, ...props }: DroppableList<T>) {
   const [items, setItems] = useState<({ key: string, value: T })[]>([])
 
   useEffect(() => {
