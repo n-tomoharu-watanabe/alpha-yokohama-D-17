@@ -2,8 +2,8 @@ import React, { useEffect } from 'react'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 
-import "../styles/globals.css"
 import "github-markdown-dracula-css"
+import "../styles/globals.css"
 
 import { Store } from '../lib/store'
 import { replaceAnchorLinkNumber } from '../utils/anchor-link'
