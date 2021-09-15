@@ -97,9 +97,6 @@ export const Page = () => {
           !isFirst ? !isAvailableSction(nowSection + 1) : false
         }>▶︎</SideButton>
         <br />
-        <SideButton onClick={() => {
-          addNextStepToAvailableSections()
-        }}>+</SideButton>
       </div>
     </>
   )
