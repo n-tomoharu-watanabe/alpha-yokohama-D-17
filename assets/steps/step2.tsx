@@ -6,7 +6,8 @@ const Answer = "きんぱつ"
 export const Page = () => {
   const Header = (
     <div>
-      <h1>Q2. 暗号が示しめしている文字は・・？</h1>
+      <h1>Q2. 隠されている文字は・・？</h1>
+      <img src="images/step2.png" className="max-w-full mb-4" alt="" />
     </div>
   )
 
