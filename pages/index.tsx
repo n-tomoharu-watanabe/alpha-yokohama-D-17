@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 
-import { HorizonCcroll } from "./horizon-sccroll"
+import { HorizonScroll } from "../components/HorizonCcroll"
 
 import { Footer } from "../components/Footer"
 import { Header } from "../components/Header"
@@ -103,13 +103,13 @@ export const Page = () => {
 
   return (
     <div>
-      <HorizonCcroll fixed={fixed}>
+      <HorizonScroll fixed={fixed}>
         {sections.map(({ type, Section, }, i) => (
           <div key={i} className={`markdown-body section-type-${type}`}>
             <Section key={i} />
           </div>
         ))}
-      </HorizonCcroll>
+      </HorizonScroll>
     </div>
   )
 }
