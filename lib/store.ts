@@ -1,11 +1,14 @@
+import React from "react"
 import { createStoreProvider } from "../utils/create-store-provider"
 
 export interface Store {
   state: { section: number[] }
+  modal?: React.ReactElement
 }
 
 const DefaultStore: Store = {
-  state: { section: [0] }
+  state: { section: [0] },
+  modal: undefined,
 }
 
 const [Provider, Hooks] = createStoreProvider(() => DefaultStore)

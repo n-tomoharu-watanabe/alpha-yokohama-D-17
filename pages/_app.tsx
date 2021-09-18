@@ -9,6 +9,7 @@ import { Store } from '../lib/store'
 import { replaceAnchorLinkNumber } from '../utils/anchor-link'
 import { useProxyRef } from '../utils/use-proxy-ref'
 import { useEffected } from '../utils/use-effected'
+import { ModalContainer } from '../components/Modal'
 
 const AppContainer = (props: AppProps) => (
   <Store.Provider>
@@ -49,6 +50,12 @@ const App = ({ Component, pageProps }: AppProps) => {
 
       <div>
         <Component {...pageProps} />
+
+        {store.modal && (
+          <ModalContainer>
+            {store.modal}
+          </ModalContainer>
+        )}
       </div>
     </>
   )
