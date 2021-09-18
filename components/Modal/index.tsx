@@ -8,7 +8,7 @@ interface ModalContainerProps {
 export const ModalContainer = ({ children }: ModalContainerProps) => {
   return (
     <EasyTransition
-      transition="transition-opacity duration-1000"
+      transition="transition-opacity duration-300"
       from="opacity-0"
       to="opacity-100"
     >
