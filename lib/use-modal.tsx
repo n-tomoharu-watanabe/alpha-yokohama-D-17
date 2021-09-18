@@ -20,7 +20,17 @@ export const useModal = (): SetModal => {
 
   return (Component) => {
     updateStore(store => {
-      store.modal = (<Component close={close} />)
+      if (!store.modal) {
+        store.modal = (<Component close={close} />)
+        return
+      }
+
+      store.modal = undefined
+      setTimeout(() => {
+        updateStore(store => {
+          store.modal = (<Component close={close} />)
+        })
+      }, 300)
     })
   }
 }
