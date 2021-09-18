@@ -51,11 +51,9 @@ const App = ({ Component, pageProps }: AppProps) => {
       <div>
         <Component {...pageProps} />
 
-        {store.modal && (
-          <ModalContainer>
-            {store.modal}
-          </ModalContainer>
-        )}
+        <ModalContainer>
+          {store.modal}
+        </ModalContainer>
       </div>
     </>
   )
