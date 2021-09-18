@@ -1,4 +1,5 @@
-import React from "react"
+import React, { Component } from "react"
+import { ModalContainer } from "../components/Modal"
 import { Store } from "./store"
 
 interface ModalContentProps {
@@ -9,7 +10,7 @@ interface SetModal {
   (Component: React.VFC<ModalContentProps>): void
 }
 
-export const useModal = (): SetModal => {
+export const useModalCore = (): SetModal => {
   const [_, updateStore] = Store.useWithUpdate()
 
   const close = () => {
@@ -32,5 +33,17 @@ export const useModal = (): SetModal => {
         })
       }, 300)
     })
+  }
+}
+
+export const useModal = (): SetModal => {
+  const setModal = useModalCore()
+
+  return (Component) => {
+    setModal(({ close }) => (
+      <ModalContainer close={close}>
+        <Component close={close} />
+      </ModalContainer>
+    ))
   }
 }
