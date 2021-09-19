@@ -76,3 +76,7 @@ export function ModalBaseTemplate(props: ModalBaseTemplateProps) {
     </div>
   )
 }
+
+export function ModalButton(props: JSX.IntrinsicElements["button"]) {
+  return <button {...props} className={`mx-2 px-4 py-0.5 transition-all duration-300 ${props.className ?? ""} `} />
+}
