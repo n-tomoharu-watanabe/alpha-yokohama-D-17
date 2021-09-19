@@ -64,12 +64,8 @@ export function ModalBaseTemplate(props: ModalBaseTemplateProps) {
         </div>
       )}
 
-      {props.content && props.footer && (
-        <hr />
-      )}
-
       {props.footer && (
-        <div className="text-blue-400 text-xl px-4 py-2 flex justify-end">
+        <div className="text-blue-400 text-xl px-4 pb-2 flex justify-end">
           {props.footer}
         </div>
       )}
