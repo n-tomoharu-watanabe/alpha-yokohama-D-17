@@ -80,3 +80,34 @@ export function ModalBaseTemplate(props: ModalBaseTemplateProps) {
 export function ModalButton(props: JSX.IntrinsicElements["button"]) {
   return <button {...props} className={`mx-2 px-4 py-0.5 transition-all duration-300 ${props.className ?? ""} `} />
 }
+
+interface ConfirmModalProps {
+  children?: React.ReactNode
+  close?: () => void
+  onConfirm?: () => void
+}
+
+export function ConfirmModal({ children, close, onConfirm }: ConfirmModalProps) {
+  return (
+    <ModalBaseTemplate
+      header="confirm"
+      content={children}
+      footer={(
+        <>
+          <ModalButton
+            className="hover:bg-blue-50 border-1 rounded text-blue-700"
+            onClick={() => { close?.() }}
+          >
+            Cancel
+          </ModalButton>
+          <ModalButton
+            className="bg-blue-700 hover:bg-blue-600 rounded text-white"
+            onClick={() => { onConfirm?.(); close?.() }}
+          >
+            OK
+          </ModalButton>
+        </>
+      )}
+    />
+  )
+}
