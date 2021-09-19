@@ -1,5 +1,6 @@
 import React from "react"
 import { EasyTransition } from "../EasyTransition"
+import { InsertClassName } from "../InsertClassName"
 
 interface ModalTransitionProps {
   children?: React.ReactElement
@@ -29,6 +30,49 @@ export function ModalContainer({ children, close }: ModalContainerProps) {
       <div className="modal-container bg-white w-11/12 max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
         {children ?? "Hello!"}
       </div>
+    </div>
+  )
+}
+
+interface ModalBaseTemplateProps {
+  header?: React.ReactNode
+  content?: React.ReactNode
+  footer?: React.ReactNode
+  color?: string
+}
+
+export function ModalBaseTemplate(props: ModalBaseTemplateProps) {
+  return (
+    <div>
+      {props.header && (
+        <div className="text-white text-lg">
+          {React.isValidElement(props.header) ? (
+            <InsertClassName where="before" className="py-0.5 px-4">
+              {props.header}
+            </InsertClassName>
+          ) : (
+            <div className="py-0.5 px-4 bg-gray-500">
+              {props.header}
+            </div>
+          )}
+        </div>
+      )}
+
+      {props.content && (
+        <div className="text-lg px-4 py-2">
+          {props.content}
+        </div>
+      )}
+
+      {props.content && props.footer && (
+        <hr />
+      )}
+
+      {props.footer && (
+        <div className="text-blue-400 text-xl px-4 py-2 flex justify-end">
+          {props.footer}
+        </div>
+      )}
     </div>
   )
 }
