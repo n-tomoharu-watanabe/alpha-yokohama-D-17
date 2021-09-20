@@ -14,6 +14,7 @@ export function InsertClassName({ children, className, where }: InsertClassNameP
   return (<CloneElement
     element={children as JSX.Element}
     props={{ className: insertText(where, className, children.props.className)}}
+    // eslint-disable-next-line react/no-children-prop
     children={children.props.children}
   />)
 }

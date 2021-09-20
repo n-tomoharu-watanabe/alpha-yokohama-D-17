@@ -48,6 +48,7 @@ export const useShowModal = () => {
         <CloneElement
           element={element as JSX.Element}
           props={{ open: showModal, close }}
+          // eslint-disable-next-line react/no-children-prop
           children={element.props.children}
         />
       </ModalContainer>
