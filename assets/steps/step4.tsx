@@ -9,6 +9,11 @@ function shuffle<T>(array: T[]) {
 const Items = shuffle(Array.from("テレポーター"))
 const Answer = "テレポーター"
 
+const Modal = {
+  hint: "マウスのドラッグで、並び替えてみると・・？",
+  answer: "テレポーター",
+}
+
 function useIsFirst(): boolean {
   const [flag, setFlag] = useState<boolean>(true)
   useEffect(() => { setFlag(false) }, [])
@@ -26,7 +31,7 @@ export const Page = () => {
   )
 
   return (
-    <StepForm value={Items.join("")} answer={Answer} header={Header} >
+    <StepForm value={Items.join("")} answer={Answer} header={Header} modal={Modal} >
       {({ setValue }) => (isFirst ? null : (
         <DraggableList items={items} onDragEnd={items => {
           setItems(items)
