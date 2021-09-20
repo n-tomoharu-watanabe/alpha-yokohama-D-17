@@ -61,7 +61,7 @@ export const StepForm = ({ value = "", answer, header, children }: StepFormProps
           type="button"
           className="px-2 py-1 m-1 bg-gray-100 hover:bg-gray-300 text-gray-700 rounded"
           onClick={() => {
-            showModal(<HintModal hint={"ヒント"} answer={`答え：${new Date().toLocaleTimeString()}`}/>)
+            showModal(<HintModal hint={"ヒント"} answer={`答え：${answer}`}/>)
           }}
         >
           ヒントを見る
