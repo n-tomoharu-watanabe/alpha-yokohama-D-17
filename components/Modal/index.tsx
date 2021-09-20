@@ -27,8 +27,8 @@ export function ModalContainer({ children, close }: ModalContainerProps) {
   return (
     <div className="modal fixed w-full h-full top-0 left-0 flex items-center justify-center">
       <div className="modal-overlay absolute w-full h-full bg-gray-900 opacity-70" onClick={() => close?.()} />
-      <div className="modal-container bg-white w-11/12 max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
-        {children ?? "Hello!"}
+      <div className="modal-container relative bg-white w-11/12 max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
+        {children}
       </div>
     </div>
   )
@@ -38,6 +38,8 @@ interface ModalBaseTemplateProps {
   header?: React.ReactNode
   content?: React.ReactNode
   footer?: React.ReactNode
+  left?: React.ReactNode
+  right?: React.ReactNode
   color?: string
 }
 
@@ -55,6 +57,18 @@ export function ModalBaseTemplate(props: ModalBaseTemplateProps) {
               {props.header}
             </div>
           )}
+        </div>
+      )}
+
+      {props.left && (
+        <div className="absolute top-0 left-0">
+          {props.left}
+        </div>
+      )}
+
+      {props.right && (
+        <div className="absolute top-0 right-0">
+          {props.right}
         </div>
       )}
 
@@ -77,6 +91,11 @@ export function ModalButton(props: JSX.IntrinsicElements["button"]) {
   return <button {...props} className={`mx-2 px-4 py-0.5 transition-all duration-300 ${props.className ?? ""} `} />
 }
 
+export function ModalCloseButton({ close, ...props }: JSX.IntrinsicElements["button"] & { close?: () => void }) {
+  const className = `px-2 text-lg text-white hover:text-gray-300 transform scale-150 transition-all duration-300 ${props.className ?? ""} `
+  return <button onClick={() => close?.()} {...props} className={className}>×</button>
+}
+
 interface MessageModalProps {
   header?: React.ReactNode
   children?: React.ReactNode
@@ -96,6 +115,9 @@ export function MessageModal({ header = "メッセージ", children, close, onCo
         >
           OK
         </ModalButton>
+      )}
+      right={(
+        <ModalCloseButton close={close} />
       )}
     />
   )
@@ -127,6 +149,9 @@ export function ConfirmModal({ children, close, onConfirm }: ConfirmModalProps) 
             OK
           </ModalButton>
         </>
+      )}
+      right={(
+        <ModalCloseButton close={close} />
       )}
     />
   )
@@ -172,6 +197,9 @@ export function HintModal({ hint, answer, close, open }: HintModalProps) {
             OK
           </ModalButton>
         </>
+      )}
+      right={(
+        <ModalCloseButton close={close} />
       )}
     />
   )
