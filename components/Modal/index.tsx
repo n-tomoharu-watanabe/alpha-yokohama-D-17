@@ -84,7 +84,7 @@ interface MessageModalProps {
   onConfirm?: () => void
 }
 
-export function MessageModal({ header = "message", children, close, onConfirm }: MessageModalProps) {
+export function MessageModal({ header = "メッセージ", children, close, onConfirm }: MessageModalProps) {
   return (
     <ModalBaseTemplate
       header={header}
@@ -110,7 +110,7 @@ interface ConfirmModalProps {
 export function ConfirmModal({ children, close, onConfirm }: ConfirmModalProps) {
   return (
     <ModalBaseTemplate
-      header="confirm"
+      header="確認メッセージ"
       content={children}
       footer={(
         <>
@@ -118,7 +118,7 @@ export function ConfirmModal({ children, close, onConfirm }: ConfirmModalProps) 
             className="hover:bg-blue-50 border-1 rounded text-blue-700"
             onClick={() => { close?.() }}
           >
-            Cancel
+            キャンセル
           </ModalButton>
           <ModalButton
             className="bg-blue-700 hover:bg-blue-600 rounded text-white"
@@ -142,20 +142,20 @@ interface HintModalProps {
 export function HintModal({ hint, answer, close, open }: HintModalProps) {
 
   const Answer = (
-    <MessageModal header={"alert"}  close={close} >
+    <MessageModal header={"メッセージ"} close={close} >
       {answer}
     </MessageModal>
   )
 
   const Confirm = (
-    <ConfirmModal close={close} onConfirm={() => open?.(Answer)}>
-      Are you sure you want to check the answer
+    <ConfirmModal  close={close} onConfirm={() => open?.(Answer)}>
+      本当に答えを見ますか？
     </ConfirmModal>
   )
 
   return (
     <ModalBaseTemplate
-      header="hint"
+      header="メッセージ"
       content={hint}
       footer={(
         <>
@@ -163,7 +163,7 @@ export function HintModal({ hint, answer, close, open }: HintModalProps) {
             className="hover:bg-red-100 border-1 border-red-600 rounded text-red-600"
             onClick={() => { open?.(Confirm); close?.() }}
           >
-            Answer
+            答えを見る
           </ModalButton>
           <ModalButton
             className="bg-blue-700 hover:bg-blue-600 rounded text-white"
