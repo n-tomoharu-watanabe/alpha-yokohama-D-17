@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import { CloneElement } from "../components/CloneElement"
 import { ModalContainer } from "../components/Modal"
 import { Store } from "./store"
 
@@ -10,7 +11,7 @@ interface SetModal {
   (Component: React.VFC<ModalContentProps>): void
 }
 
-export const useModalCore = (): SetModal => {
+export const useModalCore = () => {
   const [_, updateStore] = Store.useWithUpdate()
 
   const close = () => {
@@ -19,7 +20,7 @@ export const useModalCore = (): SetModal => {
     })
   }
 
-  return (Component) => {
+  const setModalComponent: SetModal = (Component) => {
     updateStore(store => {
       if (!store.modal) {
         store.modal = (<Component close={close} />)
@@ -34,16 +35,24 @@ export const useModalCore = (): SetModal => {
       }, 300)
     })
   }
+
+  return setModalComponent
 }
 
-export const useModal = (): SetModal => {
+export const useShowModal = () => {
   const setModal = useModalCore()
 
-  return (Component) => {
+  const showModal = (element: React.ReactElement) => {
     setModal(({ close }) => (
       <ModalContainer close={close}>
-        <Component close={close} />
+        <CloneElement
+          element={element as JSX.Element}
+          props={{ open: showModal, close }}
+          children={element.props.children}
+        />
       </ModalContainer>
     ))
   }
+
+  return showModal
 }
