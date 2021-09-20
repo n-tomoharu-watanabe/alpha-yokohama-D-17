@@ -104,14 +104,18 @@ export const Page = () => {
 
   const store = Store.use()
 
+  const SectionElements = useMemo(() => (
+    sections.map(({ type, Section, }, i) => (
+      <div key={i} className={`markdown-body section-type-${type}`}>
+        <Section key={i} />
+      </div>
+    ))
+  ), [store])
+
   return (
     <div>
       <HorizonScroll fixed={fixed}>
-        {sections.map(({ type, Section, }, i) => (
-          <div key={i} className={`markdown-body section-type-${type}`}>
-            {useMemo(() => <Section key={i} />, [store])}
-          </div>
-        ))}
+        {SectionElements}
       </HorizonScroll>
     </div>
   )
