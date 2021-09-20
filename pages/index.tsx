@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useMemo, useState } from "react"
 
 import { HorizonScroll } from "../components/HorizonCcroll"
 
@@ -6,6 +6,7 @@ import { Footer } from "../components/Footer"
 import { Header } from "../components/Header"
 import { SideButton } from "../components/SideButton"
 
+import { Store } from "../lib/store"
 import { getAnchorLink } from "../utils/anchor-link"
 import { useAvailableSections } from "../lib/use-available-sections"
 
@@ -101,12 +102,14 @@ export const Page = () => {
     </>
   )
 
+  const store = Store.use()
+
   return (
     <div>
       <HorizonScroll fixed={fixed}>
         {sections.map(({ type, Section, }, i) => (
           <div key={i} className={`markdown-body section-type-${type}`}>
-            <Section key={i} />
+            {useMemo(() => <Section key={i} />, [store])}
           </div>
         ))}
       </HorizonScroll>
