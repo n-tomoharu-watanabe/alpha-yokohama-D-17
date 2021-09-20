@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import { CloneElement } from "../components/CloneElement"
 import { ModalContainer } from "../components/Modal"
 import { Store } from "./store"
 
@@ -46,4 +47,22 @@ export const useModal = (): SetModal => {
       </ModalContainer>
     ))
   }
+}
+
+export const useShowModal = () => {
+  const setModal = useModalCore()
+
+  const showModal = (element: React.ReactElement) => {
+    setModal(({ close }) => (
+      <ModalContainer close={close}>
+        <CloneElement
+          element={element as JSX.Element}
+          props={{ open: showModal, close }}
+          children={element.props.children}
+        />
+      </ModalContainer>
+    ))
+  }
+
+  return showModal
 }
