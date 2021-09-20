@@ -11,7 +11,7 @@ interface SetModal {
   (Component: React.VFC<ModalContentProps>): void
 }
 
-export const useModalCore = (): SetModal => {
+export const useModalCore = () => {
   const [_, updateStore] = Store.useWithUpdate()
 
   const close = () => {
@@ -20,7 +20,7 @@ export const useModalCore = (): SetModal => {
     })
   }
 
-  return (Component) => {
+  const setModalComponent: SetModal = (Component) => {
     updateStore(store => {
       if (!store.modal) {
         store.modal = (<Component close={close} />)
@@ -35,6 +35,8 @@ export const useModalCore = (): SetModal => {
       }, 300)
     })
   }
+
+  return setModalComponent
 }
 
 export const useShowModal = () => {
