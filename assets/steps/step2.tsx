@@ -3,6 +3,11 @@ import { StepForm } from '../../components/StepForm';
 const Value = "○○○○"
 const Answer = "きんぱつ"
 
+const Modal = {
+  hint: "漢字の書かれている部分を読むと・・？",
+  answer: "きんぱつ",
+}
+
 export const Page = () => {
   const Header = (
     <div>
@@ -12,7 +17,7 @@ export const Page = () => {
   )
 
   return (
-    <StepForm value={Value} answer={Answer} header={Header} >
+    <StepForm value={Value} answer={Answer} header={Header} modal={Modal} >
       {({ register }) => (
         <div className="text-2xl text-gray-700">
           <input
