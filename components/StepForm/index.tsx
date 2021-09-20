@@ -33,12 +33,12 @@ export const StepForm = ({ value = "", answer, header, children }: StepFormProps
         showModal(<MessageModal>回答が違うみたいだ・・・</MessageModal>)
       } else {
         const onConfirm = () => {
-          addNextStepToAvailableSections()
           setTimeout(() => {
             moveToAvailableSection(i => i + 1)
           }, 100)
         }
 
+        addNextStepToAvailableSections()
         showModal(<MessageModal onConfirm={onConfirm}>おめでとう！正解！</MessageModal>)
       }
     })}>
