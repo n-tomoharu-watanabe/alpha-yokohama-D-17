@@ -1,5 +1,4 @@
 import React from "react"
-import { useModal } from "../../lib/use-modal"
 import { EasyTransition } from "../EasyTransition"
 import { InsertClassName } from "../InsertClassName"
 
@@ -136,20 +135,20 @@ export function ConfirmModal({ children, close, onConfirm }: ConfirmModalProps) 
 interface HintModalProps {
   hint?: React.ReactNode
   answer?: React.ReactNode
-  close?: () => void
+  open?: (element: React.ReactElement) => void,
+  close?: () => void,
 }
 
-export function HintModal({ hint, answer, close }: HintModalProps) {
-  const setModal = useModal()
+export function HintModal({ hint, answer, close, open }: HintModalProps) {
 
-  const Answer = () => (
+  const Answer = (
     <AlertModal header="answer" close={close} >
       {answer}
     </AlertModal>
   )
 
-  const Confirm = () => (
-    <ConfirmModal close={close} onConfirm={() => setModal(Answer)}>
+  const Confirm = (
+    <ConfirmModal close={close} onConfirm={() => open?.(Answer)}>
       Are you sure you want to check the answer
     </ConfirmModal>
   )
@@ -162,7 +161,7 @@ export function HintModal({ hint, answer, close }: HintModalProps) {
         <>
           <ModalButton
             className="hover:bg-red-100 border-1 border-red-600 rounded text-red-600"
-            onClick={() => { setModal(Confirm); close?.() }}
+            onClick={() => { open?.(Confirm); close?.() }}
           >
             Answer
           </ModalButton>

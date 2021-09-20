@@ -37,18 +37,6 @@ export const useModalCore = (): SetModal => {
   }
 }
 
-export const useModal = (): SetModal => {
-  const setModal = useModalCore()
-
-  return (Component) => {
-    setModal(({ close }) => (
-      <ModalContainer close={close}>
-        <Component close={close} />
-      </ModalContainer>
-    ))
-  }
-}
-
 export const useShowModal = () => {
   const setModal = useModalCore()
 
