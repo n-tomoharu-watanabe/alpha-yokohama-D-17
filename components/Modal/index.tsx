@@ -77,14 +77,14 @@ export function ModalButton(props: JSX.IntrinsicElements["button"]) {
   return <button {...props} className={`mx-2 px-4 py-0.5 transition-all duration-300 ${props.className ?? ""} `} />
 }
 
-interface AlertModalProps {
+interface MessageModalProps {
   header?: React.ReactNode
   children?: React.ReactNode
   close?: () => void
   onConfirm?: () => void
 }
 
-export function AlertModal({ header = "alert", children, close, onConfirm }: AlertModalProps) {
+export function MessageModal({ header = "message", children, close, onConfirm }: MessageModalProps) {
   return (
     <ModalBaseTemplate
       header={header}
@@ -142,9 +142,9 @@ interface HintModalProps {
 export function HintModal({ hint, answer, close, open }: HintModalProps) {
 
   const Answer = (
-    <AlertModal header="answer" close={close} >
+    <MessageModal header={"alert"}  close={close} >
       {answer}
-    </AlertModal>
+    </MessageModal>
   )
 
   const Confirm = (
