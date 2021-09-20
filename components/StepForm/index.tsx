@@ -3,6 +3,10 @@ import { useAvailableSections } from '../../lib/use-available-sections';
 import { useShowModal } from '../../lib/use-modal';
 import { MessageModal, HintModal } from '../Modal';
 
+function isNumber(value: unknown): value is number {
+  return ((typeof value === 'number') && (isFinite(value)));
+}
+
 interface StepFormType {
   value: string | null
 }
@@ -11,10 +15,11 @@ interface StepFormProps {
   value?: string
   answer: string
   header?: React.ReactNode
+  modal?: { hint?: string, answer?: string }
   children?: (hooks: UseFormReturn<StepFormType, object>) => React.ReactNode
 }
 
-export const StepForm = ({ value = "", answer, header, children }: StepFormProps) => {
+export const StepForm = ({ value = "", answer, header, modal, children }: StepFormProps) => {
   const {
     moveToAvailableSection,
     addNextStepToAvailableSections
@@ -61,7 +66,10 @@ export const StepForm = ({ value = "", answer, header, children }: StepFormProps
           type="button"
           className="px-2 py-1 m-1 bg-gray-100 hover:bg-gray-300 text-gray-700 rounded"
           onClick={() => {
-            showModal(<HintModal hint={"ヒント"} answer={`答え：${answer}`}/>)
+            showModal(<HintModal
+              hint={modal?.hint ?? "ヒントが設定されていません"}
+              answer={`答え：${modal?.answer ?? (isNumber(parseInt(answer)) ? `No.${parseInt(answer) + 1}` : answer)}`}
+            />)
           }}
         >
           ヒントを見る
