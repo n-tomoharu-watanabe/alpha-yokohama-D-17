@@ -148,7 +148,7 @@ export function HintModal({ hint, answer, close, open }: HintModalProps) {
   )
 
   const Confirm = (
-    <ConfirmModal  close={close} onConfirm={() => open?.(Answer)}>
+    <ConfirmModal close={close} onConfirm={() => open?.(Answer)}>
       本当に答えを見ますか？
     </ConfirmModal>
   )
