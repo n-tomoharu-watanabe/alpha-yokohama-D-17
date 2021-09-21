@@ -2,13 +2,10 @@ import React, { useEffect, useMemo, useState } from "react"
 
 import { HorizonScroll } from "../components/HorizonCcroll"
 
-import { Footer } from "../components/Footer"
-import { Header } from "../components/Header"
-import { SideButton } from "../components/SideButton"
-
 import { Store } from "../lib/store"
 import { getAnchorLink } from "../utils/anchor-link"
 import { useAvailableSections } from "../lib/use-available-sections"
+import { PageNav } from "../components/PageNav"
 
 function range(length: number) {
   return Array.from({ length }, (_, i) => i)
@@ -67,40 +64,10 @@ export const Page = () => {
   const {
     isAvailableSction,
     moveToAvailableSection,
-    addNextStepToAvailableSections
   } = useAvailableSections()
 
   const isFirst = useIsFirst()
   const nowSection = useAnchorLinkNumber()
-
-  const fixed = () => (
-    <>
-      <div className="fixed top-0">
-        <Header />
-      </div>
-
-      <div className="fixed bottom-0">
-        <Footer />
-      </div>
-
-      <div className="fixed left-0 top-1/2 transform -translate-y-1/2">
-        <SideButton onClick={() => {
-          moveToAvailableSection(n => n - 1)
-        }} disabled={
-          !isFirst ? !isAvailableSction(nowSection - 1) : false
-        }>◀︎</SideButton>
-      </div>
-
-      <div className="fixed right-0 top-1/2 transform -translate-y-1/2">
-        <SideButton onClick={() => {
-          moveToAvailableSection(n => n + 1)
-        }} disabled={
-          !isFirst ? !isAvailableSction(nowSection + 1) : false
-        }>▶︎</SideButton>
-        <br />
-      </div>
-    </>
-  )
 
   const store = Store.use()
 
@@ -114,7 +81,12 @@ export const Page = () => {
 
   return (
     <div>
-      <HorizonScroll fixed={fixed}>
+      <HorizonScroll fixed={() => (
+        <PageNav
+          disabledSideButton={i => !isFirst ? !isAvailableSction(nowSection + i) : false}
+          onClickSideButton={i => moveToAvailableSection(n => n + i)}
+        />
+      )}>
         {SectionElements}
       </HorizonScroll>
     </div>
