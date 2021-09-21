@@ -14,11 +14,17 @@ export const PageNav = (props: PageNavProps) => {
   return (
     <>
       <div className="fixed top-0">
-        <Header isFullScreen={isFullScreen} />
+        <Header
+          isFullScreen={isFullScreen}
+          toggleIsFullScreen={() => setIsFullScreen(!isFullScreen)}
+        />
       </div>
 
       <div className="fixed bottom-0">
-        <Footer isFullScreen={isFullScreen} toggleIsFullScreen={() => setIsFullScreen(!isFullScreen)} />
+        <Footer
+          isFullScreen={isFullScreen}
+          toggleIsFullScreen={() => setIsFullScreen(!isFullScreen)}
+        />
       </div>
 
       <div className="fixed left-0 top-1/2 transform -translate-y-1/2">
