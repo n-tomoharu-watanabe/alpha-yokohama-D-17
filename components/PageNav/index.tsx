@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { Footer } from "../Footer"
 import { Header } from "../Header"
 import { SideButton } from "../SideButton"
@@ -8,6 +9,8 @@ interface PageNavProps {
 }
 
 export const PageNav = (props: PageNavProps) => {
+  const [isFullScreen, setIsFullScreen] = useState<boolean>(false)
+
   return (
     <>
       <div className="fixed top-0">
@@ -15,7 +18,7 @@ export const PageNav = (props: PageNavProps) => {
       </div>
 
       <div className="fixed bottom-0">
-        <Footer />
+        <Footer isFullScreen={isFullScreen} toggleIsFullScreen={() => setIsFullScreen(!isFullScreen)} />
       </div>
 
       <div className="fixed left-0 top-1/2 transform -translate-y-1/2">
