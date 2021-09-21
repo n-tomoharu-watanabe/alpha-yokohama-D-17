@@ -56,6 +56,7 @@ export const Page = () => {
               title={`犯人${"ABCD"[i]}`}
               select={getValues("value") === String(i)}
               onClick={() => setValue("value", String(i))}
+              key={i}
             >
               <div>1. 特徴1</div>
               <div>2. 特徴2</div>
