@@ -28,20 +28,7 @@ export const Page = () => {
               onClick={() => setValue("value", String(i))}
               imgHeight={"30vh"}
               key={i}
-            >
-              {i === 2 ? (
-                <>
-                  <div>1. 特徴1</div>
-                  <div>2. 特徴2</div>
-                  <div>3. 特徴3</div>
-                  <div>4. 特徴4</div>
-                </>
-              ) : (
-                <>
-                  <div>1. 特徴1</div>
-                </>
-              )}
-            </ImgCard>
+            />
           ))}
         </div>
       ), [watch("value")]))}
