@@ -1,12 +1,13 @@
-import React, { useEffect, useMemo, useState } from "react"
+import React, { useState } from "react"
 
 import { HorizonScroll } from "../components/HorizonCcroll"
 
-import { Store } from "../lib/store"
-import { getAnchorLink } from "../utils/anchor-link"
-import { useAvailableSections } from "../lib/use-available-sections"
 import { PageNav } from "../components/PageNav"
 import { ReactMemo } from "../components/ReactHook"
+
+import { Store } from "../lib/store"
+import { useAvailableSections } from "../lib/use-available-sections"
+import { useAnchorLinkNumber } from "../utils/use-ancher-link"
 
 function range(length: number) {
   return Array.from({ length }, (_, i) => i)
@@ -22,20 +23,6 @@ interface MDXModule {
 
 interface TSXModule {
   default: React.ReactElement
-}
-
-const useAnchorLinkNumber = () => {
-  const [state, setState] = useState<number>(0)
-
-  useEffect(() => {
-    setState(Number(getAnchorLink().match(/\d+$/gm) ?? 0))
-
-    window.addEventListener("hashchange", () => {
-      setState(Number(getAnchorLink().match(/\d+$/gm) ?? 0))
-    })
-  }, [])
-
-  return state
 }
 
 export function useIsFirst(): boolean {
