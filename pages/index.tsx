@@ -81,7 +81,7 @@ export const Page = () => {
 
   return (
     <div>
-      <HorizonScroll fixed={() => (
+      <HorizonScroll fixed={(
         <PageNav
           disabledSideButton={i => !isFirst ? !isAvailableSction(nowSection + i) : false}
           onClickSideButton={i => moveToAvailableSection(n => n + i)}

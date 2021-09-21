@@ -84,7 +84,7 @@ const useScroll = ({ onStart, onEnd }: UseScrollProps = {}) => {
   return useScrollMemo
 }
 
-export const HorizonScroll = ({ children, fixed }: { children: any, fixed?: React.VFC }) => {
+export const HorizonScroll = ({ children, fixed }: { children: any, fixed?: React.ReactNode }) => {
   const useScrollMemo = useScroll({
     onEnd: (index) => {
       replaceAnchorLinkNumber(() => index)
@@ -92,7 +92,6 @@ export const HorizonScroll = ({ children, fixed }: { children: any, fixed?: Reac
   })
 
   const length: number = (children ?? {}).length ?? 0
-  const FixedComponent = fixed
 
   const { isAvailableSction } = useAvailableSections()
 
@@ -106,7 +105,7 @@ export const HorizonScroll = ({ children, fixed }: { children: any, fixed?: Reac
         <section id={`section${i}`} className={`${display} w-screen h-screen bg-gray-800 justify-center items-center`} style={{ scrollSnapAlign: "start" }} key={i}>
           <div className="box-border w-screen h-screen flex justify-center items-center text-white border-l-2 border-r-2 border-gray-700">
             {child}
-            {((i === 0 && FixedComponent) && (<FixedComponent />))}
+            {((i === 0 && fixed) && (fixed))}
           </div>
         </section>
       ))}
