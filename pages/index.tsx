@@ -6,6 +6,7 @@ import { Store } from "../lib/store"
 import { getAnchorLink } from "../utils/anchor-link"
 import { useAvailableSections } from "../lib/use-available-sections"
 import { PageNav } from "../components/PageNav"
+import { ReactMemo } from "../components/ReactHook"
 
 function range(length: number) {
   return Array.from({ length }, (_, i) => i)
@@ -71,25 +72,23 @@ export const Page = () => {
 
   const store = Store.use()
 
-  const SectionElements = useMemo(() => (
-    sections.map(({ type, Section, }, i) => (
-      <div key={i} className={`markdown-body section-type-${type}`}>
-        <Section key={i} />
-      </div>
-    ))
-  ), [store])
-
   return (
-    <div>
+    <ReactMemo deps={[store, nowSection]}>{() => (
       <HorizonScroll fixed={(
         <PageNav
           disabledSideButton={i => !isFirst ? !isAvailableSction(nowSection + i) : false}
           onClickSideButton={i => moveToAvailableSection(n => n + i)}
         />
       )}>
-        {SectionElements}
+        {sections.map(({ type, Section, }, i) => (
+          <div key={i} className={`markdown-body section-type-${type}`}>
+            <ReactMemo deps={[store]}>{() => (
+              <Section key={i} />
+            )}</ReactMemo>
+          </div>
+        ))}
       </HorizonScroll>
-    </div>
+    )}</ReactMemo>
   )
 }
 
