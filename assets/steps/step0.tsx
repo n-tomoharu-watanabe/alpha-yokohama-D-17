@@ -5,8 +5,6 @@ const Page = () => {
     moveToAvailableSection,
     addNextStepToAvailableSections
   } = useAvailableSections()
-
-  console.log("step0 render")
  
   return (
     <div className="flex flex-col items-center">
