@@ -5,6 +5,8 @@ const Page = () => {
     moveToAvailableSection,
     addNextStepToAvailableSections
   } = useAvailableSections()
+
+  console.log("step0 render")
  
   return (
     <div className="flex flex-col items-center">
@@ -17,7 +19,7 @@ const Page = () => {
         addNextStepToAvailableSections()
         setTimeout(() => {
           moveToAvailableSection(i => i + 1)
-        }, 100)
+        }, 2000)
       }}>
         Let's Start!
       </button>
