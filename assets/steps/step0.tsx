@@ -1,10 +1,14 @@
 import { useAvailableSections } from "../../lib/use-available-sections"
+import { useAnchorLinkNumber } from "../../utils/use-ancher-link"
 
 const Page = () => {
   const {
+    isAvailableSction,
     moveToAvailableSection,
     addNextStepToAvailableSections
   } = useAvailableSections()
+
+  const nowSection = useAnchorLinkNumber()
  
   return (
     <div className="flex flex-col items-center">
@@ -14,7 +18,10 @@ const Page = () => {
         bg-gray-100 hover:bg-gray-700 
         text-gray-700 hover:text-gray-100
       " onClick={() => {
-        addNextStepToAvailableSections()
+        if (!isAvailableSction(nowSection + 1)) {
+          addNextStepToAvailableSections()
+        }
+
         setTimeout(() => {
           moveToAvailableSection(i => i + 1)
         }, 500)
