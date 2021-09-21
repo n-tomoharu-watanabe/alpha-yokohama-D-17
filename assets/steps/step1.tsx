@@ -1,6 +1,13 @@
+import React, { useMemo } from 'react';
+import { ImgCard } from '../../components/ImgCard';
 import { StepForm } from '../../components/StepForm';
 
-const Answer = "2"
+const Answer = "3"
+
+const Modal = {
+  hint: "前のページに場所の特徴が・・？",
+  answer: "No.4 場所D"
+}
 
 export const Page = () => {
   const Header = (
@@ -10,19 +17,38 @@ export const Page = () => {
   )
 
   return (
-    <StepForm answer={Answer} header={Header} >
-      {({ register }) => ([0, 1, 2].map(i => (
-        <div key={i} className="text-2xl">
-          <input
-            type="radio"
-            value={i}
-            className="w-4 h-4 align-middle"
-            style={{ margin: "0 0.3em" }}
-            {...register("value")}
-          />
-          <span>{i + 1}. 場所{"ABCD"[i]}</span>
+    <StepForm answer={Answer} header={Header} modal={Modal} >
+      {({ getValues, setValue, watch }) => (useMemo(() => (
+        <div className="flex">
+          {[0, 1, 2, 3].map(i => (
+            <ImgCard
+              src={i % 2 ? (
+                "https://placehold.jp/888888/ffffff/800x600.png?text=No%20Image"
+              ) : (
+                "https://placehold.jp/888888/ffffff/400x600.png?text=No%20Image"
+              )}
+              title={`場所${"ABCD"[i]}`}
+              isSelect={getValues("value") === String(i)}
+              onClick={() => setValue("value", String(i))}
+              imgHeight={"30vh"}
+              key={i}
+            >
+              {i === 2 ? (
+                <>
+                  <div>1. 特徴1</div>
+                  <div>2. 特徴2</div>
+                  <div>3. 特徴3</div>
+                  <div>4. 特徴4</div>
+                </>
+              ) : (
+                <>
+                  <div>1. 特徴1</div>
+                </>
+              )}
+            </ImgCard>
+          ))}
         </div>
-      )))}
+      ), [watch("value")]))}
     </StepForm>
   )
 }
