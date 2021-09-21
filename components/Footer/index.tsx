@@ -1,9 +1,8 @@
 interface FooterPsops {
   isFullScreen: boolean
-  toggleIsFullScreen: () => void
 }
 
-export const Footer = ({ isFullScreen, toggleIsFullScreen }: FooterPsops) => {
+export const Footer = ({ isFullScreen }: FooterPsops) => {
   return (isFullScreen ? (
     <div className="flex justify-between items-center w-screen bg-gray-600 text-white text-xs lg:text-base">
       <div className="mx-1 whitespace-nowrap text-center">
@@ -14,10 +13,6 @@ export const Footer = ({ isFullScreen, toggleIsFullScreen }: FooterPsops) => {
 
       <div className="mx-1 whitespace-nowrap">
         <span>SCRAPが主催/公認するものではありません。</span>
-        <button
-          className="w-4 lg:w-6 h-4 lg:h-6 m-0.5 rounded-full bg-white hover:bg-gray-200 text-black"
-          onClick={() => toggleIsFullScreen()}
-        >↑</button>
       </div>
     </div>
   ) : (
@@ -40,13 +35,6 @@ export const Footer = ({ isFullScreen, toggleIsFullScreen }: FooterPsops) => {
           「リアル脱出ゲーム」は株式会社SCRAPの登録商標です。<br />
           株式会社SCRAPとN・S高で実施した授業「リアル脱出ゲームの作り方」の一環で<br />
           生徒が制作したものであり、SCRAPが主催/公認するものではありません。
-        </div>
-
-        <div className="absolute right-0 bottom-full p-2">
-          <button
-            className="w-8 lg:w-10 h-8 lg:h-10 rounded-full bg-gray-600 hover:bg-gray-500 text-white shadow-md"
-            onClick={() => toggleIsFullScreen()}
-          >↓</button>
         </div>
       </div>
     </div>

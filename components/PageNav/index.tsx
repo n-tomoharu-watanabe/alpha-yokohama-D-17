@@ -23,7 +23,6 @@ export const PageNav = (props: PageNavProps) => {
       <div className="fixed bottom-0">
         <Footer
           isFullScreen={isFullScreen}
-          toggleIsFullScreen={() => setIsFullScreen(!isFullScreen)}
         />
       </div>
 
