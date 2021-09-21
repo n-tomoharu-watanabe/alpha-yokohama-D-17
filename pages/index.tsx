@@ -73,22 +73,20 @@ export const Page = () => {
   const store = Store.use()
 
   return (
-    <ReactMemo deps={[store, nowSection]}>{() => (
-      <HorizonScroll fixed={(
-        <PageNav
-          disabledSideButton={i => !isFirst ? !isAvailableSction(nowSection + i) : false}
-          onClickSideButton={i => moveToAvailableSection(n => n + i)}
-        />
-      )}>
-        {sections.map(({ type, Section, }, i) => (
-          <div key={i} className={`markdown-body section-type-${type}`}>
-            <ReactMemo deps={[store]}>{() => (
-              <Section key={i} />
-            )}</ReactMemo>
-          </div>
-        ))}
-      </HorizonScroll>
-    )}</ReactMemo>
+    <HorizonScroll fixed={(
+      <PageNav
+        disabledSideButton={i => !isFirst ? !isAvailableSction(nowSection + i) : false}
+        onClickSideButton={i => moveToAvailableSection(n => n + i)}
+      />
+    )}>
+      {sections.map(({ type, Section, }, i) => (
+        <div key={i} className={`markdown-body section-type-${type}`}>
+          <ReactMemo deps={[store]}>{() => (
+            <Section key={i} />
+          )}</ReactMemo>
+        </div>
+      ))}
+    </HorizonScroll>
   )
 }
 
