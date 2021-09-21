@@ -6,12 +6,12 @@ function shuffle<T>(array: T[]) {
   return array.sort(() => Math.random() - 0.5)
 }
 
-const Items = shuffle(Array.from("テレポーター"))
-const Answer = "テレポーター"
+const Items = ["ろ", ...shuffle(Array.from("じうらのみ")), "せ"]
+const Answer = "ろじうらのみせ"
 
 const Modal = {
-  hint: "マウスのドラッグで、並び替えてみると・・？",
-  answer: "テレポーター",
+  hint: "最初と最後の文字はそのままだよ！（ろ？？？？？せ）",
+  answer: "ろじうらのみせ",
 }
 
 function useIsFirst(): boolean {
