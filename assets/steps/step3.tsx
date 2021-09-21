@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { ImgCard } from '../../components/ImgCard';
 import { StepForm } from '../../components/StepForm';
 
-const Answer = "3"
+const Answer = "2"
 
 const Hint = `
 以下が4人のアリバイを整理してみたよ！
@@ -16,7 +16,7 @@ const Names = ["エミリー", "ケン", "ボブ", "ウィリアム"]
 
 const Modal = {
   hint: <div className="whitespace-pre-wrap">{Hint}</div>  ,
-  answer: "No.4 犯人D"
+  answer: "ボブ"
 }
 
 export const Page = () => {
