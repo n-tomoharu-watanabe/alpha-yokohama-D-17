@@ -1,6 +1,7 @@
 import { useForm, UseFormReturn } from 'react-hook-form';
 import { useAvailableSections } from '../../lib/use-available-sections';
 import { useShowModal } from '../../lib/use-modal';
+import { useAnchorLinkNumber } from '../../utils/use-ancher-link';
 import { MessageModal, HintModal } from '../Modal';
 
 function isNumber(value: unknown): value is number {
@@ -21,6 +22,7 @@ interface StepFormProps {
 
 export const StepForm = ({ value = "", answer, header, modal, children }: StepFormProps) => {
   const {
+    isAvailableSction,
     moveToAvailableSection,
     addNextStepToAvailableSections
   } = useAvailableSections()
@@ -29,6 +31,7 @@ export const StepForm = ({ value = "", answer, header, modal, children }: StepFo
   const { handleSubmit, setValue } = formHooks
 
   const showModal = useShowModal()
+  const nowSection = useAnchorLinkNumber()
 
   return (
     <form className="flex flex-col items-center" onSubmit={handleSubmit((data) => {
@@ -43,7 +46,10 @@ export const StepForm = ({ value = "", answer, header, modal, children }: StepFo
           }, 100)
         }
 
-        addNextStepToAvailableSections()
+        if (!isAvailableSction(nowSection + 1)) {
+          addNextStepToAvailableSections()
+        }
+
         showModal(<MessageModal onConfirm={onConfirm}>おめでとう！正解！</MessageModal>)
       }
     })}>
