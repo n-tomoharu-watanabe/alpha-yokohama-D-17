@@ -25,7 +25,7 @@ export const useAvailableSections = () => {
 
   const addNextStepToAvailableSections = (): void  => {
     updateStore(() => {
-      const start = Math.max(...store.state.section)
+      const start = Math.max(...store.state.section) + 1
       const end = getNextStepIndex()
       for (let i = start; i <= end; i++) {
         store.state.section.push(i)
