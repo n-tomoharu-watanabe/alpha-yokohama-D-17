@@ -14,7 +14,7 @@ export const PageNav = (props: PageNavProps) => {
   return (
     <>
       <div className="fixed top-0">
-        <Header />
+        <Header isFullScreen={isFullScreen} />
       </div>
 
       <div className="fixed bottom-0">
