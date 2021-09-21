@@ -19,7 +19,7 @@ const Page = () => {
         addNextStepToAvailableSections()
         setTimeout(() => {
           moveToAvailableSection(i => i + 1)
-        }, 2000)
+        }, 500)
       }}>
         Let's Start!
       </button>
