@@ -5,11 +5,12 @@ interface ImgCardProps {
   title: React.ReactNode
   isSelect: boolean
   imgHeight: string
+  filter?: string
   onClick?: MouseEventHandler
   children?: React.ReactNode
 }
 
-export function ImgCard({ src, title, isSelect, imgHeight, onClick, children }: ImgCardProps) {
+export function ImgCard({ src, title, isSelect, imgHeight,filter, onClick, children }: ImgCardProps) {
   return (
     <div className={`
       flex m-1 rounded-xl text-xl text-black overflow-hidden bg-none border-4 border-blue-300
@@ -17,7 +18,7 @@ export function ImgCard({ src, title, isSelect, imgHeight, onClick, children }: 
     `} onClick={onClick}>
       <div className="bg-gray-50 card-overlay">
         <div className="relative" style={{ height: imgHeight }}>
-          <img src={src} className="h-full w-full" />
+          <img src={src} className={`h-full w-full filter ${filter ? filter : ""}`} />
           <div className="absolute left-0 bottom-0 px-2 pb-2">
             <span className="text-3xl text-white">
               {title}
