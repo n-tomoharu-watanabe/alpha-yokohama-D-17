@@ -25,6 +25,7 @@ export const Page = () => {
               src={`images/step1/${i + 1}.jpg`}
               title={`場所${"ABCD"[i]}`}
               isSelect={getValues("value") === String(i)}
+              filter="brightness-75"
               onClick={() => setValue("value", String(i))}
               imgHeight={"30vh"}
               key={i}
