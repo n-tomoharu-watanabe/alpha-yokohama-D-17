@@ -10,4 +10,29 @@ html {
   font-size: 1.3em;
 }
 
+.card-overlay {
+  position: relative;
+}
+
+.card-overlay::before {
+  /* contentプロパティは必須 */
+  content: "";
+  /* divを起点に位置を調整する */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* カスタム設定 */
+  z-index: 10;
+  background-color: gray;
+  transition: opacity 0.1s ease-in;
+  /* transitionの対象*/
+  opacity: 0;
+}
+
+.card-overlay:hover::before {
+  opacity: 0.3;
+}
+
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100");
