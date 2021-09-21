@@ -22,11 +22,7 @@ export const Page = () => {
         <div className="flex">
           {[0, 1, 2, 3].map(i => (
             <ImgCard
-              src={i % 2 ? (
-                "https://placehold.jp/888888/ffffff/800x600.png?text=No%20Image"
-              ) : (
-                "https://placehold.jp/888888/ffffff/400x600.png?text=No%20Image"
-              )}
+              src={`images/step1/${i + 1}.jpg`}
               title={`場所${"ABCD"[i]}`}
               isSelect={getValues("value") === String(i)}
               onClick={() => setValue("value", String(i))}
