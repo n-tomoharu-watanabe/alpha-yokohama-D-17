@@ -15,7 +15,7 @@ interface StepFormProps {
   value?: string
   answer: string
   header?: React.ReactNode
-  modal?: { hint?: string, answer?: string }
+  modal?: { hint?: React.ReactNode, answer?: React.ReactNode }
   children?: (hooks: UseFormReturn<StepFormType, object>) => React.ReactNode
 }
 
