@@ -37,7 +37,7 @@ export const Page = () => {
           setItems(items)
           setValue("value", items.join(""))
         }} container={(
-          <div className="flex justify-center w-80 rounded border-2 bg-gray-500 border-gray-100"></div>
+          <div className="flex justify-center w-96 rounded border-2 bg-gray-500 border-gray-100"></div>
         )}>
           {(item) => (
             <div className="px-2 py-1 m-2 text-center flex-grow rounded bg-gray-100 text-gray-700">
