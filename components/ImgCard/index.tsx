@@ -24,9 +24,11 @@ export function ImgCard({ src, title, isSelect, imgHeight, onClick, children }: 
             </span>
           </div>
         </div>
-        <div className="px-2 pb-2">
-          {children}
-        </div>
+        {children && (
+          <div className="px-2 pb-2">
+            {children}
+          </div>
+        )}
       </div>
     </div>
   )
