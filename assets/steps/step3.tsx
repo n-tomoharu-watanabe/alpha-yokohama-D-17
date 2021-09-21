@@ -22,7 +22,7 @@ const ImgCard = ({ src, title, select, onClick, children }: ImgCardProps) => {
       m-1 rounded-xl text-xl text-black overflow-hidden bg-none border-4 border-blue-300
       ${select ? "border-opacity-100" : "border-opacity-0"}
     `} onClick={onClick}>
-      <div className="bg-gray-50 hover:bg-gray-200">
+      <div className="bg-gray-50 card-overlay">
         <div className="relative" style={{ height: "35vh", maxWidth: "23vw" }}>
           <img src={src} className="h-full w-full" />
           <div className="absolute left-0 bottom-0 px-2 pb-2">
