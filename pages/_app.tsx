@@ -45,7 +45,7 @@ const App = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <Head>
-        <title>ビバリーヒルズからの脱出</title>
+        <title>映画からの脱出 at BEVERLY HILLS</title>
       </Head>
 
       <div>

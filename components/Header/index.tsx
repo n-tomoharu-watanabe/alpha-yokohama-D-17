@@ -19,7 +19,9 @@ export const Header = ({ isFullScreen, toggleIsFullScreen }: HeaderProps) => {
     <div className="relative w-screen">
       <div className="flex justify-between items-end w-screen bg-gray-600 text-white text-xs lg:text-base">
         <div className="mx-2 my-1 whitespace-nowrap text-center">
-          <span className="text-3xl font-thin" style={{ fontFamily: '"Noto Sans JP", sans-serif' }}>ビバリーヒルズからの脱出！</span>
+          <span className="text-3xl font-thin" style={{ fontFamily: '"Noto Sans JP", sans-serif' }}>
+            映画からの脱出 at BEVERLY HILLS
+          </span>
         </div>
 
         <div className="mx-2 my-1 whitespace-nowrap">
