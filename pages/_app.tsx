@@ -3,7 +3,9 @@ import type { AppProps } from 'next/app'
 import Head from 'next/head'
 
 import "github-markdown-dracula-css"
+import "../styles/tailwind-base.css"
 import "../styles/globals.css"
+import "../styles/tailwind-utils.css"
 
 import { Store } from '../lib/store'
 import { replaceAnchorLinkNumber } from '../utils/anchor-link'
