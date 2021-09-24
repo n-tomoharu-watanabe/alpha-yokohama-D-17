@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getAnchorLink } from "./anchor-link"
+import { getAnchorLink, getAnchorLinkNumber } from "./anchor-link"
 
 export const useAnchorLink = () => {
   const [state, setState] = useState<string>("")
@@ -19,10 +19,10 @@ export const useAnchorLinkNumber = () => {
   const [state, setState] = useState<number>(0)
 
   useEffect(() => {
-    setState(Number(getAnchorLink().match(/\d+$/gm) ?? 0))
+    setState(getAnchorLinkNumber())
 
     window.addEventListener("hashchange", () => {
-      setState(Number(getAnchorLink().match(/\d+$/gm) ?? 0))
+      setState(getAnchorLinkNumber())
     })
   }, [])
 

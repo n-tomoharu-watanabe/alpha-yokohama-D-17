@@ -3,6 +3,10 @@ export const getAnchorLink = (): string => {
   return window?.location.hash ?? ""
 }
 
+export const getAnchorLinkNumber = (): number => {
+  return Number(getAnchorLink().match(/\d+$/gm) ?? 0)
+}
+
 export const setAnchorLink = (value: string) => {
   if (window) { window.location.hash = value }
 }
