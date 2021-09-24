@@ -6,7 +6,6 @@ function shuffle<T>(array: T[]) {
   return array.sort(() => Math.random() - 0.5)
 }
 
-const Items = ["ろ", ...shuffle(Array.from("じうらのみ")), "せ"]
 const Answer = "ろじうらのみせ"
 
 const Modal = {
@@ -22,7 +21,7 @@ function useIsFirst(): boolean {
 
 export const Page = () => {
   const isFirst = useIsFirst()
-  const [items, setItems] = useState(Items)
+  const [items, setItems] = useState<string[]>([])
 
   const Header = (
     <div>
@@ -30,8 +29,12 @@ export const Page = () => {
     </div>
   )
 
+  useEffect(() => {
+    setItems(["ろ", ...shuffle(Array.from("じうらのみ")), "せ"])
+  }, [])
+
   return (
-    <StepForm value={Items.join("")} answer={Answer} header={Header} modal={Modal} >
+    <StepForm value={""} answer={Answer} header={Header} modal={Modal} >
       {({ setValue }) => (isFirst ? null : (
         <DraggableList items={items} onDragEnd={items => {
           setItems(items)
