@@ -28,7 +28,7 @@ export const StepForm = ({ value = "", answer, header, modal, children }: StepFo
   } = useAvailableSections()
 
   const formHooks = useForm<StepFormType>({ defaultValues: { value } })
-  const { handleSubmit, setValue } = formHooks
+  const { handleSubmit } = formHooks
 
   const showModal = useShowModal()
 
@@ -39,17 +39,16 @@ export const StepForm = ({ value = "", answer, header, modal, children }: StepFo
       } else if (data.value !== answer) {
         showModal(<MessageModal>回答が違うみたいだ・・・</MessageModal>)
       } else {
+        const nowSection = getAnchorLinkNumber()
+
+        if (!isAvailableSction(nowSection + 1)) {
+          addNextStepToAvailableSections()
+        }
 
         const onConfirm = () => {
           setTimeout(() => {
             moveToAvailableSection(i => i + 1)
           }, 100)
-        }
-
-        const nowSection = getAnchorLinkNumber()
-
-        if (!isAvailableSction(nowSection + 1)) {
-          addNextStepToAvailableSections()
         }
 
         showModal(<MessageModal onConfirm={onConfirm}>おめでとう！正解！</MessageModal>)
